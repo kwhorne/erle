@@ -32,6 +32,18 @@ Erle is a comprehensive CRM and intranet system designed to help businesses mana
 - **Blog/News System** - Company announcements and updates
 - **Reporting** - Project status and performance reports
 
+### 🎯 Feature Request Management
+- **Feature Requests** - Submit, track, and manage feature requests
+- **Voting System** - Users can vote on popular feature requests
+- **Workflow Management** - Complete status tracking from submission to completion
+- **Priority Management** - Categorize by priority (low, normal, high, critical)
+- **Type Classification** - Feature, enhancement, bug fix, integration, performance, UI/UX
+- **Assignment & Review** - Assign to team members and track reviews
+- **Bulk Operations** - Approve, reject, or manage multiple requests efficiently
+- **Business Justification** - Document business value and technical requirements
+- **Implementation Tracking** - Monitor progress with target dates and version releases
+- **Category Organization** - Organize by UI, backend, mobile, API, security, etc.
+
 ### 🌍 Multilingual Support
 - **Norwegian & English** - Native support for Norwegian Bokmål and English
 - **Real-time Language Switching** - Seamless language switching in admin panel
@@ -124,12 +136,13 @@ php artisan serve
 erle/
 ├── app/
 │   ├── Filament/           # Filament admin panel
-│   │   └── Resources/      # Project, WorkOrder, Contact resources
+│   │   └── Resources/      # Project, WorkOrder, Contact, FeatureRequest resources
 │   ├── Models/             # Eloquent models
 │   │   ├── Project.php     # Project management
 │   │   ├── WorkOrder.php   # Work order tracking
 │   │   ├── Contact.php     # Client/contact management
 │   │   ├── Document.php    # Document management
+│   │   ├── FeatureRequest.php # Feature request management
 │   │   └── User.php        # User management
 │   └── Http/               # Controllers, middleware
 ├── resources/
@@ -319,6 +332,8 @@ php artisan test
 - **spatie/laravel-medialibrary**: `^11.0` *(file management)*
 - **spatie/laravel-tags**: `^4.0` *(tagging system)*
 
+> **Note**: All resources including the new Feature Request system have full multilingual support (Norwegian/English) with seamless language switching.
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please read our contributing guidelines and submit pull requests to help improve Erle.
@@ -373,6 +388,12 @@ A: Configure your mail settings in `.env` and use Laravel's notification system.
 
 ### **Q: Is there an API available?**
 A: Not yet, but it's on the roadmap. The current system focuses on web-based management.
+
+### **Q: How do I use the Feature Request system?**
+A: Navigate to `/app/feature-requests` in the admin panel. You can submit new requests, vote on existing ones, and track their progress through the complete workflow from submission to completion.
+
+### **Q: Can I customize Feature Request categories?**
+A: Yes! The categories are defined in the translation files (`resources/lang/nb/feature_requests.php` and `resources/lang/en/feature_requests.php`). You can add, remove, or modify categories as needed.
 
 ## 🚑 Troubleshooting
 
@@ -450,6 +471,13 @@ For development purposes, a default admin user is created with the following cre
 - Users can change their language preference in the admin panel
 - Language setting is saved per user and persists across sessions
 - Supports Norwegian Bokmål (nb) and English (en)
+
+**Feature Request Access:**
+- Navigate to `/app/feature-requests` in the admin panel
+- Submit new feature requests with detailed business justification
+- Vote on existing feature requests to show support
+- Track implementation progress and status updates
+- Organized under the "Team" navigation group
 
 ## 🚀 Production Deployment
 
