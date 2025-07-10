@@ -50,25 +50,25 @@
                         <svg class="w-8 h-8 text-indigo-600 dark:text-indigo-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                         </svg>
-                        <span class="text-xl font-bold text-gray-900 dark:text-white">Erle CRM & Intranet</span>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">{{ __('welcome.title') }}</span>
                     </div>
-                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Velkommen tilbake</h1>
-                    <p class="text-gray-500 dark:text-gray-400">Logg inn for å få tilgang til ditt workspace.</p>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">{{ __('welcome.welcome_back') }}</h1>
+                    <p class="text-gray-500 dark:text-gray-400">{{ __('welcome.login_description') }}</p>
                 </div>
                 
                 <!-- Login Button -->
                 <div class="flex-1">
                     <div class="space-y-6">
                         <div class="text-center">
-                            <p class="text-gray-600 dark:text-gray-400 mb-6">Klikk på knappen nedenfor for å logge inn i systemet.</p>
+                            <p class="text-gray-600 dark:text-gray-400 mb-6">{{ __('welcome.login_instruction') }}</p>
                             <a href="{{ route('filament.app.auth.login') }}" class="inline-flex items-center justify-center w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
-                                Logg inn
+                                {{ __('welcome.login_button') }}
                             </a>
                         </div>
                         
                         @if (Route::has('filament.app.auth.password-reset.request'))
                             <div class="text-center">
-                                <a href="{{ route('filament.app.auth.password-reset.request') }}" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">Glemt passord?</a>
+                                <a href="{{ route('filament.app.auth.password-reset.request') }}" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">{{ __('welcome.forgot_password') }}</a>
                             </div>
                         @endif
                     </div>
@@ -77,7 +77,7 @@
                 <!-- Footer -->
                 <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
                     <p class="text-sm text-gray-500 dark:text-gray-400">
-                        &copy; {{ date('Y') }} Wirelabs. Alle rettigheter reservert.
+                        &copy; {{ date('Y') }} Wirelabs. {{ __('welcome.copyright') }}
                     </p>
                 </div>
             </div>
