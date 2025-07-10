@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -71,6 +72,49 @@ final class Post extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+    
+    public function likes(): HasMany
+    {
+        return $this->hasMany(PostLike::class);
+    }
+    
+    public function isLikedBy($user = null): bool
+    {
+        if (!$user) {
+            $user = auth()->user();
+        }
+        
+        if (!$user) {
+            return false;
+        }
+        
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
+    
+    public function toggleLike($user = null): bool
+    {
+        if (!$user) {
+            $user = auth()->user();
+        }
+        
+        if (!$user) {
+            return false;
+        }
+        
+        $existingLike = $this->likes()->where('user_id', $user->id)->first();
+        
+        if ($existingLike) {
+            $existingLike->delete();
+            $this->decrement('like_count');
+            return false; // unliked
+        } else {
+            $this->likes()->create([
+                'user_id' => $user->id,
+            ]);
+            $this->increment('like_count');
+            return true; // liked
+        }
     }
 
     public function scopePublished(Builder $query): Builder

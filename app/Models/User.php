@@ -16,6 +16,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery, HasMedia
 {
@@ -146,6 +147,14 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
     public function getAvatarUrl(): ?string
     {
         return $this->getFirstMediaUrl('avatar', 'thumb');
+    }
+    
+    /**
+     * Get the user's posts.
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class, 'author_id');
     }
     
     /**

@@ -17,5 +17,10 @@ final class DatabaseSeeder extends Seeder
             'email' => config('app.default_user.email'),
             'password' => bcrypt(config('app.default_user.password')),
         ]);
+        
+        $this->call([
+            PostCategorySeeder::class,
+            PostSeeder::class,
+        ]);
     }
 }

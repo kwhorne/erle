@@ -1,0 +1,243 @@
+<x-filament-panels::page>
+    <style>
+        .single-post-container {
+            --text-primary: rgb(17 24 39);
+            --text-secondary: rgb(55 65 81);
+            --text-muted: rgb(107 114 128);
+            --bg-card: rgb(255 255 255);
+            --bg-sidebar: rgb(249 250 251);
+            --bg-hover: rgb(248 250 252);
+            --border-card: rgb(229 231 235);
+            --accent-primary: rgb(59 130 246);
+            --accent-secondary: rgb(16 185 129);
+            --shadow-card: rgba(0, 0, 0, 0.05);
+        }
+        
+        .dark .single-post-container {
+            --text-primary: rgb(255 255 255);
+            --text-secondary: rgb(209 213 219);
+            --text-muted: rgb(156 163 175);
+            --bg-card: rgba(55 65 81 / 0.8);
+            --bg-sidebar: rgba(31 41 55 / 0.8);
+            --bg-hover: rgba(75 85 99 / 0.5);
+            --border-card: rgb(75 85 99);
+            --accent-primary: rgb(99 102 241);
+            --accent-secondary: rgb(34 197 94);
+            --shadow-card: rgba(0, 0, 0, 0.25);
+        }
+        
+        .article-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .article-content h1, .article-content h2, .article-content h3 {
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-content h1 { font-size: 2rem; }
+        .article-content h2 { font-size: 1.5rem; }
+        .article-content h3 { font-size: 1.25rem; }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid var(--accent-primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        
+        .related-post {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .related-post:hover {
+            background: var(--bg-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px var(--shadow-card);
+        }
+        
+        @media (max-width: 768px) {
+            .post-layout {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+    
+    <div class="single-post-container">
+        @if($post)
+            <!-- Post Header -->
+            <div style="text-align: center; margin-bottom: 3rem; padding: 2rem; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 1rem;">
+                <div style="display: inline-flex; align-items: center; background: var(--accent-primary); color: white; padding: 0.5rem 1rem; border-radius: 1rem; font-size: 0.875rem; font-weight: 500; margin-bottom: 1rem;">
+                    📂 {{ $post->category->name }}
+                </div>
+                
+                <h1 style="font-size: 2.5rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1rem; line-height: 1.2;">
+                    {{ $post->title }}
+                </h1>
+                
+                @if($post->excerpt)
+                    <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 48rem; margin-left: auto; margin-right: auto;">
+                        {{ $post->excerpt }}
+                    </p>
+                @endif
+                
+                <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; font-size: 0.9rem; color: var(--text-muted); flex-wrap: wrap;">
+                    <span style="display: flex; align-items: center; gap: 0.5rem;">
+                        👤 {{ $post->author->name }}
+                    </span>
+                    <span style="display: flex; align-items: center; gap: 0.5rem;">
+                        📅 {{ $post->published_at->format('d.m.Y') }}
+                    </span>
+                    <span style="display: flex; align-items: center; gap: 0.5rem;">
+                        👀 {{ $post->view_count }} {{ __('posts.views') }}
+                    </span>
+                    <span style="display: flex; align-items: center; gap: 0.5rem;">
+                        ❤️ {{ $post->like_count }} {{ __('posts.likes') }}
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Featured Image -->
+            @if($post->featured_image)
+                <div style="margin-bottom: 3rem; text-align: center;">
+                    <img src="{{ $post->featured_image }}" alt="{{ $post->title }}" style="max-width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 10px 25px -3px var(--shadow-card);">
+                </div>
+            @endif
+            
+            <!-- Post Layout -->
+            <div class="post-layout" style="display: grid; grid-template-columns: 1fr 300px; gap: 3rem;">
+                <!-- Main Content -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 1rem; padding: 2.5rem;">
+                    <div class="article-content">
+                        {!! $post->content !!}
+                    </div>
+                    
+                    <!-- Post Actions -->
+                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 1rem;">
+                            <button style="background: var(--accent-primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 500; cursor: pointer; transition: all 0.2s;">
+                                👍 {{ __('posts.like') }}
+                            </button>
+                            <button style="background: var(--accent-secondary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 500; cursor: pointer; transition: all 0.2s;">
+                                📤 {{ __('posts.share') }}
+                            </button>
+                        </div>
+                        
+                        <a href="{{ \App\Filament\App\Pages\PostFeed::getUrl() }}" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">
+                            ← {{ __('posts.actions.back_to_feed') }}
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div>
+                    <!-- Author Info -->
+                    <div style="background: var(--bg-sidebar); border: 1px solid var(--border-card); border-radius: 1rem; padding: 1.5rem; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">
+                            👤 {{ __('posts.about_author') }}
+                        </h3>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 3rem; height: 3rem; background: var(--accent-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                {{ substr($post->author->name, 0, 1) }}
+                            </div>
+                            <div>
+                                <p style="font-weight: 500; color: var(--text-primary); margin-bottom: 0.25rem;">
+                                    {{ $post->author->name }}
+                                </p>
+                                <p style="font-size: 0.875rem; color: var(--text-muted);">
+                                    {{ $post->author->title ?? __('posts.author') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Related Posts -->
+                    @if($this->getRelatedPosts()->isNotEmpty())
+                        <div style="background: var(--bg-sidebar); border: 1px solid var(--border-card); border-radius: 1rem; padding: 1.5rem; margin-bottom: 2rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">
+                                🔗 {{ __('posts.related_posts') }}
+                            </h3>
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                @foreach($this->getRelatedPosts() as $relatedPost)
+                                    <a href="{{ route('post.show', $relatedPost->slug) }}" class="related-post">
+                                        <h4 style="font-size: 0.9rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.3;">
+                                            {{ $relatedPost->title }}
+                                        </h4>
+                                        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                                            {{ $relatedPost->published_at->format('d.m.Y') }}
+                                        </p>
+                                        <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.75rem; color: var(--text-muted);">
+                                            <span>👀 {{ $relatedPost->view_count }}</span>
+                                            <span>❤️ {{ $relatedPost->like_count }}</span>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    
+                    <!-- More from Author -->
+                    @if($this->getMoreFromAuthor()->isNotEmpty())
+                        <div style="background: var(--bg-sidebar); border: 1px solid var(--border-card); border-radius: 1rem; padding: 1.5rem;">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">
+                                ✍️ {{ __('posts.more_from_author') }}
+                            </h3>
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                @foreach($this->getMoreFromAuthor() as $authorPost)
+                                    <a href="{{ route('post.show', $authorPost->slug) }}" class="related-post">
+                                        <h4 style="font-size: 0.9rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; line-height: 1.3;">
+                                            {{ $authorPost->title }}
+                                        </h4>
+                                        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                                            {{ $authorPost->published_at->format('d.m.Y') }}
+                                        </p>
+                                        <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.75rem; color: var(--text-muted);">
+                                            <span>👀 {{ $authorPost->view_count }}</span>
+                                            <span>❤️ {{ $authorPost->like_count }}</span>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @else
+            <div style="text-align: center; padding: 3rem;">
+                <h1 style="font-size: 2rem; color: var(--text-primary); margin-bottom: 1rem;">
+                    {{ __('posts.not_found') }}
+                </h1>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                    {{ __('posts.not_found_description') }}
+                </p>
+                <a href="{{ \App\Filament\App\Pages\PostFeed::getUrl() }}" style="background: var(--accent-primary); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 500;">
+                    {{ __('posts.actions.back_to_feed') }}
+                </a>
+            </div>
+        @endif
+    </div>
+</x-filament-panels::page>

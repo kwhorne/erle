@@ -214,4 +214,46 @@ return [
         'popular_posts' => 'Populære innlegg',
         'recent_posts' => 'Nylige innlegg',
     ],
+    
+    'feed' => [
+        'navigation_label' => 'Interne Nyheter',
+        'title' => 'Interne Nyheter',
+        'description' => 'Hold deg oppdatert på de siste nyhetene, kunngjøringene og interessante artikler fra teamet.',
+        'featured_posts' => 'Fremhevede Innlegg',
+        'latest_posts' => 'Siste Innlegg',
+        'quick_actions' => 'Hurtighandlinger',
+    ],
+    
+    'single' => [
+        'title' => 'Innlegg',
+        'about_author' => 'Om forfatteren',
+        'related_posts' => 'Relaterte innlegg',
+        'more_from_author' => 'Mer fra forfatteren',
+        'not_found' => 'Innlegg ikke funnet',
+        'not_found_description' => 'Innlegget du leter etter eksisterer ikke eller har blitt fjernet.',
+    ],
+    
+    'actions' => [
+        'like' => 'Lik',
+        'unlike' => 'Ikke lik',
+        'liked' => 'Likt!',
+        'unliked' => 'Ikke likt',
+        'share' => 'Del',
+        'back_to_feed' => 'Tilbake til feed',
+        'create_new' => 'Nytt innlegg',
+        'manage_categories' => 'Administrer kategorier',
+        'error' => 'Noe gikk galt. Prøv igjen.',
+    ],
+    
+    'stats' => [
+        'views' => 'visninger',
+        'likes' => 'likes',
+        'comments' => 'kommentarer',
+        'shares' => 'delinger',
+        'author' => 'Forfatter',
+    ],
+    
+    // Direct access translations (for quick access)
+    'create_new' => 'Nytt innlegg',
+    'manage_categories' => 'Administrer kategorier',
 ];

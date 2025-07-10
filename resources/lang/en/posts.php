@@ -214,4 +214,46 @@ return [
         'popular_posts' => 'Popular Posts',
         'recent_posts' => 'Recent Posts',
     ],
+    
+    'feed' => [
+        'navigation_label' => 'Internal News',
+        'title' => 'Internal News',
+        'description' => 'Stay updated with the latest news, announcements, and interesting articles from the team.',
+        'featured_posts' => 'Featured Posts',
+        'latest_posts' => 'Latest Posts',
+        'quick_actions' => 'Quick Actions',
+    ],
+    
+    'single' => [
+        'title' => 'Post',
+        'about_author' => 'About the author',
+        'related_posts' => 'Related posts',
+        'more_from_author' => 'More from author',
+        'not_found' => 'Post not found',
+        'not_found_description' => 'The post you are looking for does not exist or has been removed.',
+    ],
+    
+    'actions' => [
+        'like' => 'Like',
+        'unlike' => 'Unlike',
+        'liked' => 'Liked!',
+        'unliked' => 'Unliked',
+        'share' => 'Share',
+        'back_to_feed' => 'Back to feed',
+        'create_new' => 'New post',
+        'manage_categories' => 'Manage categories',
+        'error' => 'Something went wrong. Please try again.',
+    ],
+    
+    'stats' => [
+        'views' => 'views',
+        'likes' => 'likes',
+        'comments' => 'comments',
+        'shares' => 'shares',
+        'author' => 'Author',
+    ],
+    
+    // Direct access translations (for quick access)
+    'create_new' => 'New post',
+    'manage_categories' => 'Manage categories',
 ];

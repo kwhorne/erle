@@ -29,8 +29,18 @@ Erle is a comprehensive CRM and intranet system designed to help businesses mana
 
 ### 📝 Communication & Reporting
 - **Message System** - Internal communication tools
-- **Blog/News System** - Company announcements and updates
+- **Internal News Feed** - Professional post-feed system for company updates
+- **Single Post Views** - Detailed article pages with related content
+- **Post Management** - Create, edit, and manage internal posts
 - **Reporting** - Project status and performance reports
+
+### 🏠 Personalized Dashboard
+- **Warm Welcome** - Personalized greeting with user's first name
+- **Guided Tour** - Introduction to key system features
+- **Beautiful Design** - Modern, responsive layout with color-coded sections
+- **Multilingual** - Welcome message in Norwegian and English
+- **Feature Overview** - Quick introduction to dashboard, projects, knowledge base, and news
+- **Motivational Messaging** - Encouraging and friendly tone
 
 ### 🎯 Feature Request Management
 - **Feature Requests** - Submit, track, and manage feature requests
@@ -43,6 +53,20 @@ Erle is a comprehensive CRM and intranet system designed to help businesses mana
 - **Business Justification** - Document business value and technical requirements
 - **Implementation Tracking** - Monitor progress with target dates and version releases
 - **Category Organization** - Organize by UI, backend, mobile, API, security, etc.
+
+### 📰 Internal News Feed
+- **Professional Post Feed** - Modern, magazine-style layout for company news
+- **Featured Posts** - Highlight important announcements with star marking
+- **Single Post Views** - Detailed article pages with rich content formatting
+- **Author Information** - Display author profiles and related posts
+- **Related Content** - Intelligent suggestions for related articles
+- **Categories & Tags** - Organize posts by categories and topics
+- **View Counters** - Track post engagement and popularity
+- **Responsive Design** - Beautiful layout on all devices
+- **Dark Mode Support** - Full dark/light theme compatibility
+- **Dashboard Integration** - Latest news widget on main dashboard
+- **Search & Filter** - Find posts by category, author, or content
+- **Rich Text Editor** - Create formatted posts with images and media
 
 ### 🌍 Multilingual Support
 - **Norwegian & English** - Native support for Norwegian Bokmål and English
@@ -136,17 +160,24 @@ php artisan serve
 erle/
 ├── app/
 │   ├── Filament/           # Filament admin panel
-│   │   └── Resources/      # Project, WorkOrder, Contact, FeatureRequest resources
+│   │   ├── Pages/          # Dashboard, PostFeed, SinglePost pages
+│   │   ├── Widgets/        # WelcomeWidget, DashboardOverviewWidget
+│   │   └── Resources/      # Project, WorkOrder, Contact, FeatureRequest, Posts resources
 │   ├── Models/             # Eloquent models
 │   │   ├── Project.php     # Project management
 │   │   ├── WorkOrder.php   # Work order tracking
 │   │   ├── Contact.php     # Client/contact management
 │   │   ├── Document.php    # Document management
 │   │   ├── FeatureRequest.php # Feature request management
+│   │   ├── Post.php        # Internal news and posts
+│   │   ├── PostCategory.php # Post categorization
 │   │   └── User.php        # User management
 │   └── Http/               # Controllers, middleware
 ├── resources/
 │   ├── views/              # Blade templates with FluxUI
+│   │   ├── filament/       # Filament custom views
+│   │   │   ├── pages/      # PostFeed, SinglePost page templates
+│   │   │   └── widgets/    # WelcomeWidget, DashboardOverviewWidget templates
 │   ├── js/                 # Alpine.js components
 │   └── css/                # Tailwind CSS
 ├── database/
@@ -163,7 +194,10 @@ erle/
 ## 🎯 Access Points
 
 - **Public Site**: `http://erle.test` (with Herd) or `http://localhost:8000`
-- **Admin Panel**: `http://erle.test/admin` (with Herd) or `http://localhost:8000/admin`
+- **Admin Panel**: `http://erle.test/app` (with Herd) or `http://localhost:8000/app`
+- **Dashboard**: `http://erle.test/app/dashboard` - Personalized dashboard with overview
+- **Internal News**: `http://erle.test/app/post-feed` - Company news and updates
+- **Feature Requests**: `http://erle.test/app/feature-requests` - Submit and track feature requests
 
 ## 🔧 Configuration
 
@@ -395,6 +429,12 @@ A: Navigate to `/app/feature-requests` in the admin panel. You can submit new re
 ### **Q: Can I customize Feature Request categories?**
 A: Yes! The categories are defined in the translation files (`resources/lang/nb/feature_requests.php` and `resources/lang/en/feature_requests.php`). You can add, remove, or modify categories as needed.
 
+### **Q: Can I customize the dashboard welcome message?**
+A: Absolutely! The welcome message is defined in the translation files (`resources/lang/nb/dashboard.php` and `resources/lang/en/dashboard.php`). You can modify the greeting, sections, and closing message to match your company's tone.
+
+### **Q: Why doesn't the dashboard show my first name correctly?**
+A: The dashboard extracts the first name from the user's full name. Make sure your user profile has the correct name format (e.g., "John Doe" will show "John").
+
 ## 🚑 Troubleshooting
 
 ### **Migration Issues**
@@ -471,6 +511,13 @@ For development purposes, a default admin user is created with the following cre
 - Users can change their language preference in the admin panel
 - Language setting is saved per user and persists across sessions
 - Supports Norwegian Bokmål (nb) and English (en)
+
+**Dashboard Experience:**
+- Personalized welcome message with user's first name
+- Warm, friendly greeting in Norwegian or English
+- Guided tour of key system features
+- Beautiful color-coded sections for different areas
+- Motivational messaging to encourage engagement
 
 **Feature Request Access:**
 - Navigate to `/app/feature-requests` in the admin panel
