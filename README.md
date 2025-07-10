@@ -41,6 +41,16 @@ Erle is a comprehensive CRM and intranet system designed to help businesses mana
 - **Multilingual** - Welcome message in Norwegian and English
 - **Feature Overview** - Quick introduction to dashboard, projects, knowledge base, and news
 - **Motivational Messaging** - Encouraging and friendly tone
+- **Clickable News Feed** - Direct access to internal posts from dashboard
+
+### 🎨 Modern Welcome Page
+- **Split Layout Design** - Background image on left, login form on right
+- **Responsive Design** - Optimized for all screen sizes
+- **Dark Mode Support** - Automatic theme switching
+- **Multilingual Interface** - Norwegian and English support
+- **Clean Branding** - Professional Erle CRM & Intranet branding
+- **Seamless Login** - Direct integration with Filament authentication
+- **Accessibility** - WCAG compliant design patterns
 
 ### 🎯 Feature Request Management
 - **Feature Requests** - Submit, track, and manage feature requests
