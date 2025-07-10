@@ -12,6 +12,11 @@ final class ListMessages extends ListRecords
 {
     protected static string $resource = MessageResource::class;
 
+    public function getTitle(): string
+    {
+        return __('messages.pages.list');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

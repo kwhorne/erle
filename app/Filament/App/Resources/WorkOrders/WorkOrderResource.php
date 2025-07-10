@@ -19,12 +19,30 @@ class WorkOrderResource extends Resource
 {
     protected static ?string $model = WorkOrder::class;
 
-    protected static string|UnitEnum|null $navigationGroup = 'CRM';
-    protected static ?string $navigationLabel = 'Arbeidsordrer';
+    protected static string|UnitEnum|null $navigationGroup = null;
+    protected static ?string $navigationLabel = null;
+    protected static ?string $modelLabel = null;
+    protected static ?string $pluralModelLabel = null;
     
-    protected static ?string $modelLabel = 'Arbeidsordre';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('work_orders.resource.navigation_group');
+    }
     
-    protected static ?string $pluralModelLabel = 'Arbeidsordrer';
+    public static function getNavigationLabel(): string
+    {
+        return __('work_orders.resource.navigation_label');
+    }
+    
+    public static function getModelLabel(): string
+    {
+        return __('work_orders.resource.model_label');
+    }
+    
+    public static function getPluralModelLabel(): string
+    {
+        return __('work_orders.resource.plural_model_label');
+    }
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrench;
     

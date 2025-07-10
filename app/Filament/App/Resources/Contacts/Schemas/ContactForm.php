@@ -28,17 +28,17 @@ class ContactForm
                 Tabs::make('ContactTabs')
                     ->columnSpan(2)
                     ->tabs([
-                        Tab::make('Grunnleggende informasjon')
+                        Tab::make(__('contacts.tabs.basic_information'))
                             ->icon('heroicon-o-building-office')
                             ->schema([
                                 TextInput::make('organization')
-                                    ->label('Organisasjon/Bedrift')
+                                    ->label(__('contacts.fields.organization'))
                                     ->maxLength(255)
                                     ->prefixIcon('heroicon-o-building-office')
                                     ->columnSpanFull(),
                                     
                                 TextInput::make('address')
-                                    ->label('Adresse')
+                                    ->label(__('contacts.fields.address'))
                                     ->maxLength(500)
                                     ->prefixIcon('heroicon-o-map-pin')
                                     ->columnSpanFull(),
@@ -46,75 +46,75 @@ class ContactForm
                                 Grid::make(3)
                                     ->schema([
                                         TextInput::make('postal_code')
-                                            ->label('Postnr.')
+                                            ->label(__('contacts.fields.postal_code'))
                                             ->maxLength(10)
                                             ->prefixIcon('heroicon-o-hashtag'),
                                             
                                         TextInput::make('city')
-                                            ->label('Sted')
+                                            ->label(__('contacts.fields.city'))
                                             ->maxLength(255)
                                             ->prefixIcon('heroicon-o-building-office-2'),
                                             
                                         TextInput::make('organization_number')
-                                            ->label('Org.Nr.')
+                                            ->label(__('contacts.fields.organization_number'))
                                             ->maxLength(20)
                                             ->prefixIcon('heroicon-o-identification')
-                                            ->placeholder('123 456 789'),
+                                            ->placeholder(__('contacts.placeholders.organization_number')),
                                     ]),
                                     
                                 Grid::make(3)
                                     ->schema([
                                         TextInput::make('email')
-                                            ->label('E-post')
+                                            ->label(__('contacts.fields.email'))
                                             ->email()
                                             ->maxLength(255)
                                             ->prefixIcon('heroicon-o-envelope'),
                                             
                                         TextInput::make('phone')
-                                            ->label('Telefon')
+                                            ->label(__('contacts.fields.phone'))
                                             ->tel()
                                             ->maxLength(20)
                                             ->prefixIcon('heroicon-o-phone'),
                                             
                                         TextInput::make('website')
-                                            ->label('Nettside')
+                                            ->label(__('contacts.fields.website'))
                                             ->url()
                                             ->maxLength(255)
                                             ->prefixIcon('heroicon-o-globe-alt')
-                                            ->placeholder('https://'),
+                                            ->placeholder(__('contacts.placeholders.website')),
                                     ]),
                                     
                                 TextInput::make('country')
-                                    ->label('Land')
+                                    ->label(__('contacts.fields.country'))
                                     ->maxLength(255)
                                     ->prefixIcon('heroicon-o-flag')
                                     ->default('Norge')
                                     ->columnSpanFull(),
                                     
                                 Textarea::make('notes')
-                                    ->label('Notater')
+                                    ->label(__('contacts.fields.notes'))
                                     ->rows(4)
                                     ->maxLength(1000)
-                                    ->placeholder('Skriv notater om kontakten, møter, avtaler etc.')
+                                    ->placeholder(__('contacts.placeholders.notes'))
                                     ->columnSpanFull(),
                             ]),
                             
-                        Tab::make('Kontaktpersoner')
+                        Tab::make(__('contacts.tabs.contact_persons'))
                             ->icon('heroicon-o-users')
                             ->schema([
                                 Repeater::make('contact_persons')
-                                    ->label('Kontaktpersoner')
+                                    ->label(__('contacts.tabs.contact_persons'))
                                     ->schema([
                                         Grid::make(2)
                                             ->schema([
                                                 TextInput::make('name')
-                                                    ->label('Navn')
+                                                    ->label(__('contacts.fields.name'))
                                                     ->required()
                                                     ->maxLength(255)
                                                     ->prefixIcon('heroicon-o-user'),
                                                     
                                                 TextInput::make('title')
-                                                    ->label('Stilling/Rolle')
+                                                    ->label(__('contacts.fields.title'))
                                                     ->maxLength(255)
                                                     ->prefixIcon('heroicon-o-briefcase'),
                                             ]),
@@ -122,13 +122,13 @@ class ContactForm
                                         Grid::make(2)
                                             ->schema([
                                                 TextInput::make('email')
-                                                    ->label('E-post')
+                                                    ->label(__('contacts.fields.email'))
                                                     ->email()
                                                     ->maxLength(255)
                                                     ->prefixIcon('heroicon-o-envelope'),
                                                     
                                                 TextInput::make('phone')
-                                                    ->label('Telefon')
+                                                    ->label(__('contacts.fields.phone'))
                                                     ->tel()
                                                     ->maxLength(20)
                                                     ->prefixIcon('heroicon-o-phone'),
@@ -137,40 +137,40 @@ class ContactForm
                                         Grid::make(2)
                                             ->schema([
                                                 TextInput::make('linkedin')
-                                                    ->label('LinkedIn')
+                                                    ->label(__('contacts.fields.linkedin'))
                                                     ->url()
                                                     ->maxLength(255)
                                                     ->prefixIcon('heroicon-o-link')
-                                                    ->placeholder('https://linkedin.com/in/'),
+                                                    ->placeholder(__('contacts.placeholders.linkedin')),
                                                     
                                                 TextInput::make('twitter')
-                                                    ->label('Twitter/X')
+                                                    ->label(__('contacts.fields.twitter'))
                                                     ->url()
                                                     ->maxLength(255)
                                                     ->prefixIcon('heroicon-o-link')
-                                                    ->placeholder('https://twitter.com/'),
+                                                    ->placeholder(__('contacts.placeholders.twitter')),
                                             ]),
                                             
                                         Textarea::make('notes')
-                                            ->label('Personlige notater')
+                                            ->label(__('contacts.fields.personal_notes'))
                                             ->rows(3)
                                             ->maxLength(500)
-                                            ->placeholder('Notater om denne personen...')
+                                            ->placeholder(__('contacts.placeholders.personal_notes'))
                                             ->columnSpanFull(),
                                     ])
                                     ->defaultItems(1)
-                                    ->addActionLabel('Legg til kontaktperson')
+                                    ->addActionLabel(__('contacts.actions.add_contact_person'))
                                     ->reorderable()
                                     ->collapsible()
-                                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? 'Ny kontaktperson')
+                                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? __('contacts.actions.new_contact_person'))
                                     ->columnSpanFull(),
                             ]),
                             
-                        Tab::make('Dokumenter')
+                        Tab::make(__('contacts.tabs.documents'))
                             ->icon('heroicon-o-document-text')
                             ->schema([
                                 FileUpload::make('contactdocs')
-                                    ->label('Dokumenter')
+                                    ->label(__('contacts.fields.documents'))
                                     ->directory('contactdocs')
                                     ->disk('public')
                                     ->multiple()
@@ -191,89 +191,82 @@ class ContactForm
                                     ->openable()
                                     ->deletable()
                                     ->reorderable()
-                                    ->uploadingMessage('Laster opp dokumenter...')
+                                    ->uploadingMessage(__('contacts.actions.uploading_message'))
                                     ->columnSpanFull(),
                             ]),
                     ]),
                     
-                Section::make('CRM Data')
-                    ->description('Salgs- og oppfølgingsinformasjon')
+                Section::make(__('contacts.sections.crm_data.title'))
+                    ->description(__('contacts.sections.crm_data.description'))
                     ->columnSpan(1)
                     ->schema([
                         Select::make('type')
-                            ->label('Type')
+                            ->label(__('contacts.fields.type'))
                             ->options(ContactType::options())
                             ->prefixIcon('heroicon-o-tag')
                             ->required(),
                             
                         Select::make('assigned_to')
-                            ->label('Ansvarlig')
+                            ->label(__('contacts.fields.assigned_to'))
                             ->options(User::where('is_employee', true)->pluck('name', 'id'))
                             ->prefixIcon('heroicon-o-user')
                             ->searchable()
                             ->preload(),
                             
                         Select::make('source')
-                            ->label('Kilde')
+                            ->label(__('contacts.fields.source'))
                             ->options([
-                                'website' => 'Nettside',
-                                'referral' => 'Anbefaling',
-                                'linkedin' => 'LinkedIn',
-                                'facebook' => 'Facebook',
-                                'google' => 'Google/Søk',
-                                'advertisement' => 'Annonse',
-                                'email_campaign' => 'E-postkampanje',
-                                'trade_show' => 'Messe/Utstilling',
-                                'networking' => 'Nettverksarrangement',
-                                'cold_call' => 'Kald oppringning',
-                                'existing_customer' => 'Eksisterende kunde',
-                                'partner' => 'Partner',
-                                'media' => 'Media/Presse',
-                                'other' => 'Annet',
+                                'website' => __('contacts.sources.website'),
+                                'referral' => __('contacts.sources.referral'),
+                                'linkedin' => __('contacts.sources.linkedin'),
+                                'facebook' => __('contacts.sources.facebook'),
+                                'google' => __('contacts.sources.google'),
+                                'advertisement' => __('contacts.sources.advertisement'),
+                                'email_campaign' => __('contacts.sources.email_campaign'),
+                                'trade_show' => __('contacts.sources.trade_show'),
+                                'networking' => __('contacts.sources.networking'),
+                                'cold_call' => __('contacts.sources.cold_call'),
+                                'existing_customer' => __('contacts.sources.existing_customer'),
+                                'partner' => __('contacts.sources.partner'),
+                                'media' => __('contacts.sources.media'),
+                                'other' => __('contacts.sources.other'),
                             ])
                             ->prefixIcon('heroicon-o-arrow-top-right-on-square')
-                            ->placeholder('Velg hvor kontakten kom fra'),
+                            ->placeholder(__('contacts.placeholders.source')),
                             
                         TextInput::make('value')
-                            ->label('Verdi (NOK)')
+                            ->label(__('contacts.fields.value'))
                             ->numeric()
                             ->prefix('kr')
                             ->prefixIcon('heroicon-o-banknotes')
-                            ->placeholder('0,00'),
+                            ->placeholder(__('contacts.placeholders.value')),
                             
                         Select::make('status')
-                            ->label('Status')
+                            ->label(__('contacts.fields.status'))
                             ->options([
-                                'active' => 'Aktiv',
-                                'inactive' => 'Inaktiv', 
-                                'archived' => 'Arkivert',
+                                'active' => __('contacts.statuses.active'),
+                                'inactive' => __('contacts.statuses.inactive'), 
+                                'archived' => __('contacts.statuses.archived'),
                             ])
                             ->prefixIcon('heroicon-o-signal')
                             ->default('active')
                             ->required(),
                             
                         DatePicker::make('last_contact_date')
-                            ->label('Siste kontakt')
+                            ->label(__('contacts.fields.last_contact_date'))
                             ->prefixIcon('heroicon-o-calendar-days')
                             ->displayFormat('d.m.Y'),
                             
                         DatePicker::make('next_followup_date')
-                            ->label('Neste oppfølging')
+                            ->label(__('contacts.fields.next_followup_date'))
                             ->prefixIcon('heroicon-o-clock')
                             ->displayFormat('d.m.Y'),
                             
                         TagsInput::make('tags')
-                            ->label('Tagger')
+                            ->label(__('contacts.fields.tags'))
                             ->prefixIcon('heroicon-o-hashtag')
-                            ->placeholder('Legg til tagger...')
-                            ->suggestions([
-                                'VIP',
-                                'Stor kunde',
-                                'Lead',
-                                'Referanse',
-                                'Eksisterende kunde',
-                                'Potensiell kunde',
-                            ]),
+                            ->placeholder(__('contacts.placeholders.tags'))
+                            ->suggestions(__('contacts.tag_suggestions')),
                     ]),
             ]);
     }

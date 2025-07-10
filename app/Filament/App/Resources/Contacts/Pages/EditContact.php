@@ -10,6 +10,11 @@ class EditContact extends EditRecord
 {
     protected static string $resource = ContactResource::class;
 
+    public function getTitle(): string
+    {
+        return __('contacts.pages.edit');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

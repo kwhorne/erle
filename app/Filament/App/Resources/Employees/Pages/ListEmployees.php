@@ -11,6 +11,11 @@ final class ListEmployees extends ListRecords
 {
     protected static string $resource = EmployeeResource::class;
 
+    public function getTitle(): string
+    {
+        return __('employees.pages.list');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

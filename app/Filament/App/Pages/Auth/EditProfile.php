@@ -13,9 +13,11 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Filament\Support\Exceptions\Halt;
 use Illuminate\Database\Eloquent\Model;
@@ -31,10 +33,25 @@ class EditProfile extends Page implements HasForms
 {
     use InteractsWithForms;
     use InteractsWithFormActions;
-    protected static ?string $title = 'Min Profil';
-    protected ?string $heading = 'Min Profil';
-    protected ?string $subheading = 'Oppdater din personlige informasjon og kontaktdetaljer.';
+    protected static ?string $title = null;
+    protected ?string $heading = null;
+    protected ?string $subheading = null;
     protected static ?string $slug = 'profile';
+    
+    public function getTitle(): string
+    {
+        return __('profile.title');
+    }
+    
+    public function getHeading(): string
+    {
+        return __('profile.heading');
+    }
+    
+    public function getSubheading(): string
+    {
+        return __('profile.subheading');
+    }
 
     protected string $view = 'filament.app.pages.edit-profile';
 
@@ -44,7 +61,7 @@ class EditProfile extends Page implements HasForms
     
     public static function getLabel(): string
     {
-        return 'Min Profil';
+        return __('profile.title');
     }
     
     public static function getPluralLabel(): string
@@ -54,7 +71,7 @@ class EditProfile extends Page implements HasForms
     
     public static function getNavigationLabel(): string
     {
-        return 'Min Profil';
+        return __('profile.navigation_label');
     }
 
     public ?array $profileData = [];
@@ -78,28 +95,29 @@ class EditProfile extends Page implements HasForms
         return $schema
             ->columns(3)
             ->components([
-                Section::make('Personlig informasjon')
-                    ->description('Oppdater din personlige informasjon og kontaktdetaljer.')
+                Section::make(__('profile.sections.personal_information.title'))
+                    ->description(__('profile.sections.personal_information.description'))
                     ->columnSpan(2)
                     ->schema([
                         FileUpload::make('avatar')
-                            ->label('Profilbilde')
+                            ->label(__('profile.fields.avatar'))
                             ->image()
                             ->avatar()
+                            ->disk('public')
                             ->directory('avatars')
-                            ->visibility('private')
+                            ->visibility('public')
                             ->maxSize(2048)
                             ->alignCenter(),
                             
                         Grid::make(2)
                             ->schema([
                                 TextInput::make('name')
-                                    ->label('Fullt navn')
+                                    ->label(__('profile.fields.name'))
                                     ->required()
                                     ->maxLength(255),
                                     
                                 TextInput::make('email')
-                                    ->label('E-postadresse')
+                                    ->label(__('profile.fields.email'))
                                     ->email()
                                     ->required()
                                     ->unique(ignoreRecord: true)
@@ -109,78 +127,78 @@ class EditProfile extends Page implements HasForms
                         Grid::make(2)
                             ->schema([
                                 TextInput::make('phone')
-                                    ->label('Telefonnummer')
+                                    ->label(__('profile.fields.phone'))
                                     ->tel()
                                     ->maxLength(255),
                                     
                                 DatePicker::make('birth_date')
-                                    ->label('Fødselsdato')
+                                    ->label(__('profile.fields.birth_date'))
                                     ->native(false)
                                     ->maxDate(now()->subYears(16)),
                             ]),
                             
                         Textarea::make('bio')
-                            ->label('Om meg')
+                            ->label(__('profile.fields.bio'))
                             ->rows(3)
                             ->maxLength(500)
                             ->columnSpanFull(),
                     ]),
                     
-                Section::make('Arbeidsinformasjon')
-                    ->description('Din rolle og ansettelsesdetaljer.')
+                Section::make(__('profile.sections.work_information.title'))
+                    ->description(__('profile.sections.work_information.description'))
                     ->columnSpan(1)
                     ->schema([
                         TextInput::make('job_title')
-                            ->label('Stillingstittel')
+                            ->label(__('profile.fields.job_title'))
                             ->maxLength(255),
                             
                         TextInput::make('department')
-                            ->label('Avdeling')
+                            ->label(__('profile.fields.department'))
                             ->maxLength(255),
                             
                         TextInput::make('location')
-                            ->label('Arbeidssted')
+                            ->label(__('profile.fields.location'))
                             ->maxLength(255),
                     ]),
                     
-                Section::make('Adresse')
-                    ->description('Din adresse og stedinformasjon.')
+                Section::make(__('profile.sections.address.title'))
+                    ->description(__('profile.sections.address.description'))
                     ->columnSpan(2)
                     ->schema([
                         TextInput::make('address')
-                            ->label('Adresse')
+                            ->label(__('profile.fields.address'))
                             ->maxLength(255)
                             ->columnSpanFull(),
                             
                         Grid::make(3)
                             ->schema([
                                 TextInput::make('postal_code')
-                                    ->label('Postnummer')
+                                    ->label(__('profile.fields.postal_code'))
                                     ->maxLength(10),
                                     
                                 TextInput::make('city')
-                                    ->label('By')
+                                    ->label(__('profile.fields.city'))
                                     ->maxLength(255),
                                     
                                 TextInput::make('country')
-                                    ->label('Land')
+                                    ->label(__('profile.fields.country'))
                                     ->default('Norge')
                                     ->maxLength(255),
                             ]),
                     ]),
                     
-                Section::make('Sosiale medier')
-                    ->description('Dine profiler på sosiale medier.')
+                Section::make(__('profile.sections.social_media.title'))
+                    ->description(__('profile.sections.social_media.description'))
                     ->columnSpan(1)
                     ->schema([
                         TextInput::make('linkedin_url')
-                            ->label('LinkedIn profil')
+                            ->label(__('profile.fields.linkedin_url'))
                             ->url()
                             ->maxLength(255)
                             ->placeholder('https://linkedin.com/in/...'),
                             
                         TextInput::make('twitter_url')
-                            ->label('Twitter/X profil')
+                            ->label(__('profile.fields.twitter_url'))
                             ->url()
                             ->maxLength(255)
                             ->placeholder('https://twitter.com/...'),
@@ -194,14 +212,14 @@ class EditProfile extends Page implements HasForms
     {
         return $schema
             ->components([
-                Section::make('Oppdater passord')
-                    ->description('Sørg for at du bruker et godt, tilfeldig og sikkert passord.')
+                Section::make(__('profile.sections.change_password.title'))
+                    ->description(__('profile.sections.change_password.description'))
                     ->schema([
                         TextInput::make('current_password')
                             ->password()
                             ->required()
                             ->currentPassword()
-                            ->label('Nåværende passord'),
+                            ->label(__('profile.fields.current_password')),
 
                         TextInput::make('password')
                             ->password()
@@ -211,13 +229,13 @@ class EditProfile extends Page implements HasForms
                             ->dehydrateStateUsing(fn ($state): string => Hash::make($state))
                             ->live(debounce: 500)
                             ->same('passwordConfirmation')
-                            ->label('Nytt passord'),
+                            ->label(__('profile.fields.new_password')),
                             
                         TextInput::make('passwordConfirmation')
                             ->password()
                             ->required()
                             ->dehydrated(false)
-                            ->label('Bekreft nytt passord'),
+                            ->label(__('profile.fields.confirm_password')),
                     ]),
             ])
             ->model($this->getUser())
@@ -259,7 +277,7 @@ class EditProfile extends Page implements HasForms
     {
         return [
             Action::make('updateProfileAction')
-                ->label('Lagre profil')
+                ->label(__('profile.actions.update_profile'))
                 ->submit('editProfileForm'),
         ];
     }
@@ -268,7 +286,7 @@ class EditProfile extends Page implements HasForms
     {
         return [
             Action::make('updatePasswordAction')
-                ->label('Oppdater passord')
+                ->label(__('profile.actions.update_password'))
                 ->submit('editPasswordForm'),
         ];
     }

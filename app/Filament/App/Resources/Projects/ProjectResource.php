@@ -19,10 +19,32 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static string|UnitEnum|null $navigationGroup = 'CRM';
+    protected static string|UnitEnum|null $navigationGroup = null;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $navigationLabel = 'Prosjekter';
+    protected static ?string $navigationLabel = null;
+    protected static ?string $modelLabel = null;
+    protected static ?string $pluralModelLabel = null;
+    
+    public static function getNavigationGroup(): ?string
+    {
+        return __('projects.resource.navigation_group');
+    }
+    
+    public static function getNavigationLabel(): string
+    {
+        return __('projects.resource.navigation_label');
+    }
+    
+    public static function getModelLabel(): string
+    {
+        return __('projects.resource.model_label');
+    }
+    
+    public static function getPluralModelLabel(): string
+    {
+        return __('projects.resource.plural_model_label');
+    }
 
     protected static ?int $navigationSort = 3;
 

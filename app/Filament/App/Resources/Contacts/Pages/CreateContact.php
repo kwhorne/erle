@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateContact extends CreateRecord
 {
     protected static string $resource = ContactResource::class;
+
+    public function getTitle(): string
+    {
+        return __('contacts.pages.create');
+    }
 }

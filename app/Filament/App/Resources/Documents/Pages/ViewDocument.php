@@ -22,11 +22,16 @@ final class ViewDocument extends ViewRecord
 {
     protected static string $resource = DocumentResource::class;
     
+    public function getTitle(): string
+    {
+        return __('documents.pages.view');
+    }
+    
     protected function getHeaderActions(): array
     {
         return [
             Action::make('download')
-                ->label('Last ned')
+                ->label(__('documents.table.actions.download'))
                 ->icon('heroicon-o-arrow-down-tray')
                 ->color('success')
                 ->action(function () {

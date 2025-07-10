@@ -22,13 +22,30 @@ final class PostResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-newspaper';
     
-    protected static ?string $navigationLabel = 'Innlegg';
+    protected static ?string $navigationLabel = null;
+    protected static ?string $modelLabel = null;
+    protected static ?string $pluralModelLabel = null;
+    protected static string|UnitEnum|null $navigationGroup = null;
     
-    protected static ?string $modelLabel = 'Innlegg';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('posts.resource.navigation_group');
+    }
     
-    protected static ?string $pluralModelLabel = 'Innlegg';
-
-    protected static string|UnitEnum|null $navigationGroup = 'Feed';
+    public static function getNavigationLabel(): string
+    {
+        return __('posts.resource.navigation_label');
+    }
+    
+    public static function getModelLabel(): string
+    {
+        return __('posts.resource.model_label');
+    }
+    
+    public static function getPluralModelLabel(): string
+    {
+        return __('posts.resource.plural_model_label');
+    }
     
     protected static ?int $navigationSort = 1;
 

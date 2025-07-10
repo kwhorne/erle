@@ -12,6 +12,11 @@ final class ListPostCategories extends ListRecords
 {
     protected static string $resource = PostCategoryResource::class;
 
+    public function getTitle(): string
+    {
+        return __('post_categories.pages.list');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -22,13 +22,30 @@ final class MessageResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-chat-bubble-left-right';
     
-    protected static ?string $navigationLabel = 'Meldinger';
+    protected static ?string $navigationLabel = null;
+    protected static ?string $modelLabel = null;
+    protected static ?string $pluralModelLabel = null;
+    protected static string|UnitEnum|null $navigationGroup = null;
     
-    protected static ?string $modelLabel = 'Melding';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('messages.resource.navigation_group');
+    }
     
-    protected static ?string $pluralModelLabel = 'Meldinger';
-
-    protected static string|UnitEnum|null $navigationGroup = 'Team';
+    public static function getNavigationLabel(): string
+    {
+        return __('messages.resource.navigation_label');
+    }
+    
+    public static function getModelLabel(): string
+    {
+        return __('messages.resource.model_label');
+    }
+    
+    public static function getPluralModelLabel(): string
+    {
+        return __('messages.resource.plural_model_label');
+    }
     
     protected static ?int $navigationSort = 2;
 

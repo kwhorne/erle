@@ -12,6 +12,11 @@ final class ListPosts extends ListRecords
 {
     protected static string $resource = PostResource::class;
 
+    public function getTitle(): string
+    {
+        return __('posts.pages.list');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -6,12 +6,16 @@ namespace App\Filament\App\Resources\Documents\Pages;
 
 use App\Filament\App\Resources\Documents\DocumentResource;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Support\Facades\Auth;
 
 final class CreateDocument extends CreateRecord
 {
     protected static string $resource = DocumentResource::class;
     
-    protected static ?string $title = 'Last opp dokument';
+    public function getTitle(): string
+    {
+        return __('documents.pages.create');
+    }
     
     protected function getRedirectUrl(): string
     {
@@ -20,7 +24,7 @@ final class CreateDocument extends CreateRecord
     
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['uploaded_by'] = auth()->id();
+        $data['uploaded_by'] = Auth::id();
         
         return $data;
     }

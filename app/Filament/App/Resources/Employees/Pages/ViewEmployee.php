@@ -10,6 +10,11 @@ use Filament\Resources\Pages\ViewRecord;
 final class ViewEmployee extends ViewRecord
 {
     protected static string $resource = EmployeeResource::class;
+
+    public function getTitle(): string
+    {
+        return __('employees.pages.view');
+    }
     
     protected string $view = 'filament.app.resources.employees.pages.view-employee';
 

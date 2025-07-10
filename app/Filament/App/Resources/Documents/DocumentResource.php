@@ -22,13 +22,30 @@ final class DocumentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
     
-    protected static ?string $navigationLabel = 'Dokumenter';
+    protected static ?string $navigationLabel = null;
+    protected static ?string $modelLabel = null;
+    protected static ?string $pluralModelLabel = null;
+    protected static string|UnitEnum|null $navigationGroup = null;
     
-    protected static ?string $modelLabel = 'Dokument';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('documents.resource.navigation_group');
+    }
     
-    protected static ?string $pluralModelLabel = 'Dokumenter';
-
-    protected static string|UnitEnum|null $navigationGroup = 'Dokumenter';
+    public static function getNavigationLabel(): string
+    {
+        return __('documents.resource.navigation_label');
+    }
+    
+    public static function getModelLabel(): string
+    {
+        return __('documents.resource.model_label');
+    }
+    
+    public static function getPluralModelLabel(): string
+    {
+        return __('documents.resource.plural_model_label');
+    }
     
     protected static ?int $navigationSort = 1;
 

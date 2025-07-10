@@ -1,8 +1,12 @@
 # Erle - CRM and intranet system 🚀
 
-> **Modern CRM and intranet system built with Laravel 12, FluxUI v2 and Filament 4**
+> **Modern multilingual CRM and intranet system built with Laravel 12, FluxUI v2 and Filament 4**
 
 Erle is a comprehensive CRM and intranet system designed to help businesses manage projects, work orders, contacts, and documents efficiently. Built with **Laravel 12**, **FluxUI v2**, and **Filament 4**, it provides a modern, intuitive interface for project management workflows.
+
+**🌍 Multilingual Support**: Native Norwegian and English localization with seamless language switching.
+
+**🧹 Optimized Database**: Clean, consolidated migrations for better performance and maintainability.
 
 ## ✨ Features
 
@@ -28,6 +32,13 @@ Erle is a comprehensive CRM and intranet system designed to help businesses mana
 - **Blog/News System** - Company announcements and updates
 - **Reporting** - Project status and performance reports
 
+### 🌍 Multilingual Support
+- **Norwegian & English** - Native support for Norwegian Bokmål and English
+- **Real-time Language Switching** - Seamless language switching in admin panel
+- **Localized Content** - All UI elements, forms, and messages fully translated
+- **Filament Language Switch** - Official plugin integration for language management
+- **User Preferences** - Individual language settings per user
+
 ### 🎨 Modern Tech Stack
 - **Laravel 12** - Latest PHP framework
 - **FluxUI v2** - Modern, Apple-inspired component library
@@ -35,6 +46,24 @@ Erle is a comprehensive CRM and intranet system designed to help businesses mana
 - **Tailwind CSS 4.0** - Utility-first CSS framework
 - **Alpine.js** - Lightweight JavaScript framework
 - **Livewire** - Dynamic frontend components
+
+## 📸 Screenshots
+
+### Admin Dashboard
+![Admin Dashboard](docs/screenshots/dashboard.png)
+*Clean, modern dashboard with project overview and quick actions*
+
+### Language Switching
+![Language Switch](docs/screenshots/language-switch.png)
+*Seamless language switching between Norwegian and English*
+
+### Project Management
+![Project Management](docs/screenshots/projects.png)
+*Comprehensive project tracking with timeline and budget management*
+
+### Mobile Responsive
+![Mobile View](docs/screenshots/mobile.png)
+*Fully responsive design that works on all devices*
 
 ## 🚀 Quick Start
 
@@ -67,6 +96,10 @@ php artisan key:generate
 
 4. **Database setup**
 ```bash
+# Option 1: Use clean migrations (recommended)
+./database/migrations_clean/migrate_clean.sh
+
+# Option 2: Standard migration
 php artisan migrate --seed
 ```
 
@@ -105,7 +138,12 @@ erle/
 │   └── css/                # Tailwind CSS
 ├── database/
 │   ├── migrations/         # Database migrations
+│   ├── migrations_clean/   # Clean, optimized migrations
 │   └── seeders/            # Database seeders
+├── resources/
+│   ├── lang/               # Language files (nb, en)
+│   │   ├── nb/             # Norwegian Bokmål translations
+│   │   └── en/             # English translations
 └── routes/                 # Application routes
 ```
 
@@ -115,6 +153,21 @@ erle/
 - **Admin Panel**: `http://erle.test/admin` (with Herd) or `http://localhost:8000/admin`
 
 ## 🔧 Configuration
+
+### 🌍 Language Settings
+Erle supports Norwegian Bokmål (nb) and English (en) with automatic language switching:
+
+```bash
+# Default language is set to Norwegian Bokmål
+APP_LOCALE=nb
+APP_FALLBACK_LOCALE=en
+```
+
+**Language Switching**:
+- Users can switch language in the admin panel
+- Language preference is saved per user
+- All UI elements update immediately
+- Translation files located in `resources/lang/nb/` and `resources/lang/en/`
 
 ### FluxUI Icons
 Import Lucide icons using the built-in Artisan command:
@@ -159,6 +212,33 @@ composer format  # Fix code style with Pint
 - **GDPR Compliance** - Privacy by design
 - **Audit Logging** - Activity tracking
 
+## 🧹 Database Optimization
+
+Erle includes a clean migration system that consolidates fragmented migrations for better performance:
+
+### Clean Migrations
+```bash
+# Use optimized migrations (recommended)
+./database/migrations_clean/migrate_clean.sh
+
+# This script will:
+# - Backup current database
+# - Replace fragmented migrations with clean versions
+# - Reduce migration count from 22 to 9 files
+# - Improve database performance with proper indexing
+```
+
+### Migration Comparison
+- **Before**: 22 migrations with fragmented changes
+- **After**: 9 clean, consolidated migrations
+- **Benefits**: 59% reduction in migration files, better performance, easier maintenance
+
+### Database Features
+- **Optimized Indexing** - Strategic indexes on all tables
+- **JSON Support** - Flexible data structures where needed
+- **Foreign Key Relationships** - Proper relational integrity
+- **Migration Rollback** - Safe database version management
+
 ## 🔄 Development Workflow
 
 ### Database Seeding
@@ -178,14 +258,66 @@ npm run watch  # Watch for changes
 php artisan test
 ```
 
+## 🛣️ Roadmap
+
+### 📊 Analytics & Reporting
+- [ ] Project profitability analysis
+- [ ] Time tracking reports
+- [ ] Client satisfaction metrics
+- [ ] Team performance dashboards
+
+### 📱 Mobile App
+- [ ] React Native mobile app
+- [ ] Time tracking on mobile
+- [ ] Push notifications
+- [ ] Offline capability
+
+### 🌐 Additional Languages
+- [ ] Danish localization
+- [ ] Swedish localization
+- [ ] German localization
+- [ ] Community translation contributions
+
+### 🔌 Integrations
+- [ ] Slack integration
+- [ ] Microsoft Teams integration
+- [ ] Calendar sync (Google/Outlook)
+- [ ] Email automation
+
+## 📚 Best Practices
+
+### 🔒 Security
+- Always use HTTPS in production
+- Regularly update dependencies
+- Implement rate limiting
+- Use environment variables for sensitive data
+- Enable two-factor authentication
+
+### 🚀 Performance
+- Use database indexing effectively
+- Implement caching strategies
+- Optimize images and assets
+- Monitor database queries
+- Use CDN for static assets
+
+### 🌍 Localization
+- Always use translation keys in code
+- Test both language versions
+- Consider cultural differences in design
+- Provide fallback translations
+- Use proper date/time formatting
+
 ## 📦 Key Dependencies
 
 - **laravel/framework**: `^12.0`
 - **filament/filament**: `^4.0`
+- **bezhansalleh/filament-language-switch**: `^4.0.0-beta2` *(language switching)*
 - **flux-ui/flux**: `^2.0` *(requires license)*
 - **tailwindcss**: `^4.0`
 - **alpinejs**: `^3.0`
 - **livewire/livewire**: `^3.0`
+- **spatie/laravel-medialibrary**: `^11.0` *(file management)*
+- **spatie/laravel-tags**: `^4.0` *(tagging system)*
 
 ## 🤝 Contributing
 
@@ -216,6 +348,87 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Erle is developed by **Knut W. Horne** ([kwhorne.com](https://kwhorne.com)) - a passionate developer creating innovative digital solutions with focus on user experience and modern technologies.
 
+## ❓ FAQ
+
+### **Q: How do I change the default language?**
+A: Edit your `.env` file and set `APP_LOCALE=en` for English or `APP_LOCALE=nb` for Norwegian. Users can also change their individual language preference in the admin panel.
+
+### **Q: Can I add more languages?**
+A: Yes! Create new language files in `resources/lang/` and update the language switcher configuration in `AppServiceProvider.php`.
+
+### **Q: How do I backup my database?**
+A: Use the built-in backup command: `php artisan db:backup` or use the migration cleanup script which includes automatic backup.
+
+### **Q: What if I encounter migration issues?**
+A: Use the clean migration system: `./database/migrations_clean/migrate_clean.sh`. This will backup your data and use optimized migrations.
+
+### **Q: How do I add custom fields to projects?**
+A: Use the `custom_fields` JSON column in the projects table, or create a migration to add specific columns.
+
+### **Q: Can I customize the admin panel theme?**
+A: Yes! The admin panel uses Filament 4 with FluxUI components. You can customize colors, fonts, and layouts in the panel configuration.
+
+### **Q: How do I set up email notifications?**
+A: Configure your mail settings in `.env` and use Laravel's notification system. Message and project notifications are built-in.
+
+### **Q: Is there an API available?**
+A: Not yet, but it's on the roadmap. The current system focuses on web-based management.
+
+## 🚑 Troubleshooting
+
+### **Migration Issues**
+```bash
+# If you encounter migration conflicts
+php artisan migrate:status
+php artisan migrate:rollback
+
+# Use clean migrations instead
+./database/migrations_clean/migrate_clean.sh
+```
+
+### **Language Switching Not Working**
+```bash
+# Clear caches
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
+# Verify language files exist
+ls resources/lang/nb/
+ls resources/lang/en/
+```
+
+### **FluxUI Components Not Loading**
+```bash
+# Verify FluxUI is installed
+composer show flux-ui/flux
+
+# Check if license is configured
+# Visit https://fluxui.dev for licensing
+```
+
+### **Performance Issues**
+```bash
+# Optimize application
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Check database indexes
+php artisan db:show --counts
+```
+
+### **File Upload Issues**
+```bash
+# Check storage permissions
+php artisan storage:link
+chmod -R 755 storage/
+
+# Verify file size limits in php.ini
+upload_max_filesize = 10M
+post_max_size = 10M
+```
+
 ---
 
 **Ready to build something amazing?** 🚀
@@ -229,8 +442,14 @@ For development purposes, a default admin user is created with the following cre
 **Admin User:**
 - Email: `admin@example.com`
 - Password: `password`
+- **Default Language**: Norwegian Bokmål (nb)
 
 > **Security Note:** Remember to change the default password before deploying to production.
+
+**Language Preference:**
+- Users can change their language preference in the admin panel
+- Language setting is saved per user and persists across sessions
+- Supports Norwegian Bokmål (nb) and English (en)
 
 ## 🚀 Production Deployment
 

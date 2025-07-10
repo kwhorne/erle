@@ -31,6 +31,8 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         'name',
         'email',
         'password',
+        'locale',
+        'avatar',
         'is_employee',
         'is_admin',
         'phone',

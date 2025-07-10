@@ -12,6 +12,11 @@ final class ListDocuments extends ListRecords
 {
     protected static string $resource = DocumentResource::class;
 
+    public function getTitle(): string
+    {
+        return __('documents.pages.list');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

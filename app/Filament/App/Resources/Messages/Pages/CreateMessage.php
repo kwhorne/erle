@@ -11,7 +11,12 @@ use Filament\Notifications\Notification;
 final class CreateMessage extends CreateRecord
 {
     protected static string $resource = MessageResource::class;
-    
+
+    public function getTitle(): string
+    {
+        return __('messages.pages.create');
+    }
+
     protected static ?string $maxWidth = 'full';
 
     protected function getRedirectUrl(): string
