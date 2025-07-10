@@ -76,7 +76,9 @@
             
             <!-- Feature Grid -->
             <div class="welcome-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;">
-                <div style="background-color: var(--bg-blue); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-blue);">
+                <div style="background-color: var(--bg-blue); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-blue); transition: all 0.3s ease;"
+                     onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                     <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
                         <span style="font-size: 1.5rem;">📊</span>
                         <div style="flex: 1;">
@@ -90,7 +92,9 @@
                     </div>
                 </div>
                 
-                <div style="background-color: var(--bg-green); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-green);">
+                <div style="background-color: var(--bg-green); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-green); transition: all 0.3s ease;"
+                     onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                     <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
                         <span style="font-size: 1.5rem;">🏢</span>
                         <div style="flex: 1;">
@@ -104,7 +108,9 @@
                     </div>
                 </div>
                 
-                <div style="background-color: var(--bg-purple); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-purple);">
+                <div style="background-color: var(--bg-purple); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-purple); transition: all 0.3s ease;"
+                     onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                     <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
                         <span style="font-size: 1.5rem;">📚</span>
                         <div style="flex: 1;">
@@ -118,7 +124,10 @@
                     </div>
                 </div>
                 
-                <div style="background-color: var(--bg-orange); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-orange);">
+                <a href="{{ \App\Filament\App\Resources\Posts\PostResource::getUrl('index') }}" 
+                   style="background-color: var(--bg-orange); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-orange); display: block; text-decoration: none; transition: all 0.3s ease; cursor: pointer;"
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                     <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
                         <span style="font-size: 1.5rem;">📰</span>
                         <div style="flex: 1;">
@@ -130,7 +139,7 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             
             <!-- Footer Message -->
