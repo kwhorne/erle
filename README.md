@@ -1,6 +1,6 @@
 # Erle - CRM and intranet system 🚀
 
-> **Modern project management application built with Laravel 12, FluxUI v2 and Filament 4**
+> **Modern CRM and intranet system built with Laravel 12, FluxUI v2 and Filament 4**
 
 Erle is a comprehensive CRM and intranet system designed to help businesses manage projects, work orders, contacts, and documents efficiently. Built with **Laravel 12**, **FluxUI v2**, and **Filament 4**, it provides a modern, intuitive interface for project management workflows.
 
