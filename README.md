@@ -93,6 +93,22 @@ Erle is a comprehensive CRM and intranet system designed to help businesses mana
 - **Alpine.js** - Lightweight JavaScript framework
 - **Livewire** - Dynamic frontend components
 
+## 🆕 Recent Updates
+
+### Welcome Page & Authentication (Latest)
+- **🎨 New Welcome Page** - Modern split-layout design with background image
+- **🔐 Simplified Login** - Streamlined authentication flow via Filament
+- **🌐 Multilingual Welcome** - Norwegian and English support for welcome page
+- **📱 Mobile Optimized** - Responsive design for all devices
+- **🎯 Clean Branding** - Professional Erle CRM & Intranet identity
+- **🔗 Dashboard Integration** - Clickable news feed linking to internal posts
+- **♿ Accessibility** - WCAG compliant design patterns
+
+### Dashboard Enhancements
+- **📰 Interactive News Feed** - Direct access to internal posts from dashboard
+- **🎨 Enhanced Hover Effects** - Improved user experience with consistent interactions
+- **🌙 Dark Mode Compatibility** - Full dark mode support across all components
+
 ## 📸 Screenshots
 
 ### Admin Dashboard
@@ -263,11 +279,40 @@ composer format  # Fix code style with Pint
 
 ## 🛡️ Security Features
 
+### 🔒 Authentication & Access Control
 - **User Authentication** - Multi-level access control
 - **Role-based Permissions** - Employee, admin, patient roles
 - **Data Encryption** - Sensitive data protection
 - **GDPR Compliance** - Privacy by design
 - **Audit Logging** - Activity tracking
+
+### 🚫 Search Engine Protection (Internal System)
+**Erle is designed as an internal business system and implements multiple layers of protection against search engine indexing:**
+
+#### 🤖 robots.txt Protection
+- **Complete Disallow** - Blocks all search engine crawlers
+- **Explicit Bot Blocking** - Specifically blocks Google, Bing, Yahoo, DuckDuckGo, Baidu, Yandex
+- **Social Media Crawlers** - Blocks Facebook, Twitter, LinkedIn crawlers
+- **No Sitemap** - No sitemap provided to search engines
+
+#### 🏷️ Meta Tag Protection
+- **HTML Meta Tags** - `noindex, nofollow, noarchive, nosnippet, noimageindex`
+- **Bot-Specific Tags** - Individual meta tags for major search engines
+- **Social Media Tags** - Prevents social media preview generation
+- **Applied to All Pages** - Comprehensive coverage across the application
+
+#### 📜 HTTP Header Protection
+- **X-Robots-Tag Header** - Server-level indexing prevention
+- **Cache Control** - Prevents caching of sensitive internal data
+- **Security Headers** - X-Frame-Options, X-Content-Type-Options, Referrer-Policy
+- **Apache .htaccess** - Additional server-level protection
+
+#### 🛠️ Middleware Implementation
+- **PreventIndexing Middleware** - Automatic header injection
+- **Applied Globally** - All web routes protected automatically
+- **No Configuration Required** - Works out of the box
+
+**⚠️ Important**: This system is designed for internal use only. All measures are in place to prevent accidental public exposure or search engine indexing.
 
 ## 🧹 Database Optimization
 
