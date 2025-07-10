@@ -1,30 +1,40 @@
-# Wirement - TALL Starter Pack 🚀
+# Erle - CRM and intranet system 🚀
 
-> **Modern Laravel starter pack with FluxUI v2 and Filament 4**
+> **Modern project management application built with Laravel 12, FluxUI v2 and Filament 4**
 
-Wirement is a bloat-free starter kit for quickly launching **Laravel 12** projects. It comes with **FluxUI v2** and **Filament 4** pre-configured, plus essential tools to speed up your development—nothing more, nothing unnecessary.
+Erle is a comprehensive CRM and intranet system designed to help businesses manage projects, work orders, contacts, and documents efficiently. Built with **Laravel 12**, **FluxUI v2**, and **Filament 4**, it provides a modern, intuitive interface for project management workflows.
 
 ## ✨ Features
 
-### 🎨 Frontend Stack
-- **FluxUI v2** - Modern, Apple-inspired component library *(requires license)*
-- **Tailwind CSS 4.0** - Utility-first CSS framework
-- **Hero / Lucide Icons** - Beautiful, customizable icons
-- **Alpine.js** - Lightweight JavaScript framework
+### 📊 Project Management     
+- **Project Tracking** - Complete project lifecycle management
+- **Work Orders** - Create and manage work orders with priorities
+- **Budget Management** - Track estimated vs actual costs and hours
+- **Timeline Management** - Plan and monitor project deadlines
+- **Progress Tracking** - Visual progress indicators and milestones
 
-### 🛠️ Backend Stack
+### 👥 Client & Contact Management
+- **Contact Directory** - Manage client and team contact information
+- **Client Communication** - Track client notes and communications
+- **Team Assignment** - Assign project managers and team leads
+
+### 📁 Document Management
+- **File Organization** - Categorized document storage
+- **Media Library** - Integrated file management system
+- **Document Sharing** - Secure document access and sharing
+
+### 📝 Communication & Reporting
+- **Message System** - Internal communication tools
+- **Blog/News System** - Company announcements and updates
+- **Reporting** - Project status and performance reports
+
+### 🎨 Modern Tech Stack
 - **Laravel 12** - Latest PHP framework
-- **Filament 4** - Modern admin panel builder
-- **MySQL** - Reliable database solution
+- **FluxUI v2** - Modern, Apple-inspired component library
+- **Filament 4** - Beautiful admin panel
+- **Tailwind CSS 4.0** - Utility-first CSS framework
+- **Alpine.js** - Lightweight JavaScript framework
 - **Livewire** - Dynamic frontend components
-
-### 🚀 Pre-configured Features
-- **Authentication** - Laravel Breeze with modern styling
-- **Admin Panel** - Filament 4 ready to go
-- **FluxUI Components** - Beautiful UI components
-- **Database Seeding** - Basic user seeding
-- **Asset Pipeline** - Vite with Tailwind CSS
-- **Code Quality** - Laravel Pint, PHPStan, Pest testing
 
 ## 🚀 Quick Start
 
@@ -33,14 +43,14 @@ Wirement is a bloat-free starter kit for quickly launching **Laravel 12** projec
 - Composer
 - Node.js & npm
 - MySQL 8.0+
-- Laravel Herd (recommended)
+- Laravel Herd (recommended for local development)
 
 ### Installation
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/kwhorne/wirement.git
-cd wirement
+git clone https://github.com/kwhorne/erle.git
+cd erle
 ```
 
 2. **Install dependencies**
@@ -67,18 +77,27 @@ npm run build
 
 6. **Start development server**
 ```bash
+# Using Laravel Herd (recommended)
+# Herd should automatically detect the project
+# Visit: http://erle.test
+
+# Alternative: Using built-in server
 php artisan serve
-# or use Laravel Herd
 ```
 
 ## 📁 Project Structure
 
 ```
-wirement/
+erle/
 ├── app/
 │   ├── Filament/           # Filament admin panel
-│   │   └── Resources/      # Filament resources
+│   │   └── Resources/      # Project, WorkOrder, Contact resources
 │   ├── Models/             # Eloquent models
+│   │   ├── Project.php     # Project management
+│   │   ├── WorkOrder.php   # Work order tracking
+│   │   ├── Contact.php     # Client/contact management
+│   │   ├── Document.php    # Document management
+│   │   └── User.php        # User management
 │   └── Http/               # Controllers, middleware
 ├── resources/
 │   ├── views/              # Blade templates with FluxUI
@@ -92,8 +111,8 @@ wirement/
 
 ## 🎯 Access Points
 
-- **Public Site**: `http://localhost:8000`
-- **Admin Panel**: `http://localhost:8000/admin`
+- **Public Site**: `http://erle.test` (with Herd) or `http://localhost:8000`
+- **Admin Panel**: `http://erle.test/admin` (with Herd) or `http://localhost:8000/admin`
 
 ## 🔧 Configuration
 
@@ -111,7 +130,7 @@ The admin panel is configured in `app/Providers/Filament/AdminPanelProvider.php`
 - Profile management included
 
 ### Development Commands
-Wirement includes convenient composer commands:
+Erle includes convenient composer commands:
 ```bash
 composer review  # Run all code quality tools
 composer test    # Run Pest test suite
@@ -170,7 +189,7 @@ php artisan test
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our contributing guidelines and submit pull requests to help improve Wirement.
+Contributions are welcome! Please read our contributing guidelines and submit pull requests to help improve Erle.
 
 ## 📄 License
 
@@ -195,13 +214,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👨‍💻 About the Developer
 
-Wirement is developed by **Knut W. Horne** ([kwhorne.com](https://kwhorne.com)) - a passionate developer creating innovative digital solutions with focus on user experience and modern technologies.
+Erle is developed by **Knut W. Horne** ([kwhorne.com](https://kwhorne.com)) - a passionate developer creating innovative digital solutions with focus on user experience and modern technologies.
 
 ---
 
 **Ready to build something amazing?** 🚀
 
-Start your next Laravel project with Wirement and experience the power of modern web development tools working together seamlessly.
+Start managing your projects efficiently with Erle and experience the power of modern project management tools.
 
 ## 🔄 Default Credentials
 
@@ -249,12 +268,13 @@ php artisan make:filament-widget WidgetName
 ```
 
 ### FluxUI Components
-Wirement is built to work with FluxUI v2 components. **Note:** FluxUI requires a separate license for commercial use. Check the [FluxUI documentation](https://fluxui.dev/docs) for usage examples and licensing information.
+Erle is built to work with FluxUI v2 components. **Note:** FluxUI requires a separate license for commercial use. Check the [FluxUI documentation](https://fluxui.dev/docs) for usage examples and licensing information.
 
 ### Artisan Commands
 The project includes essential Artisan commands:
 - `php artisan flux:icon` - Import Lucide icons
 - `php artisan make:filament-user` - Create admin users
+- `php artisan migrate:fresh --seed` - Reset database with sample data
 
 ## 🌟 What's Included
 
@@ -302,5 +322,5 @@ After installation, you can:
 
 ---
 
-**Built with ❤️ by Knut W. Horne** - *Innovative digital solutions for modern web development*
+**Built with ❤️ by Knut W. Horne** - *Innovative digital solutions for modern project management*
 

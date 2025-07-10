@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "kwhorne/wirement",
+    "name": "kwhorne/erle",
     "type": "project",
-    "description": "Wirement is a time-saving starter kit to quickly launch Laravel 12.x projects. It includes FilamentPHP 4.x pre-installed and configured, along with additional tools and features to streamline your development workflow.",
-    "keywords": ["laravel", "framework", "filamentphp", "starter-kit", "wirement"],
+    "description": "Erle is a comprehensive project management application built with Laravel 12, FluxUI v2, and Filament 4. It provides tools for managing projects, work orders, contacts, and documents efficiently.",
+    "keywords": ["laravel", "framework", "filamentphp", "project-management", "erle", "fluxui"],
     "license": "MIT",
     "require": {
         "php": "^8.3",
