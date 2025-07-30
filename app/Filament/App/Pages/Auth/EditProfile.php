@@ -1,53 +1,56 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\App\Pages\Auth;
 
-use Filament\Pages\Page;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Pages\Concerns\InteractsWithFormActions;
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
+use Filament\Pages\Concerns\InteractsWithFormActions;
+use Filament\Pages\Page;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Support\Exceptions\Halt;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Filament\Support\Exceptions\Halt;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Notifications\Notification;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * @property \Filament\Schemas\Schema $editProfileForm
  * @property \Filament\Schemas\Schema $editPasswordForm
  */
-class EditProfile extends Page implements HasForms
+final class EditProfile extends Page implements HasForms
 {
     use InteractsWithForms;
     use InteractsWithFormActions;
+
     protected static ?string $title = null;
     protected ?string $heading = null;
     protected ?string $subheading = null;
     protected static ?string $slug = 'profile';
-    
+
     public function getTitle(): string
     {
         return __('profile.title');
     }
-    
+
     public function getHeading(): string
     {
         return __('profile.heading');
     }
-    
+
     public function getSubheading(): string
     {
         return __('profile.subheading');
@@ -57,18 +60,18 @@ class EditProfile extends Page implements HasForms
 
     protected static bool $shouldRegisterNavigation = false;
     protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-user';
-    protected static ?string $navigationLabel = 'Min Profil';
-    
+    protected static ?string $navigationLabel = 'My Profile';
+
     public static function getLabel(): string
     {
         return __('profile.title');
     }
-    
+
     public static function getPluralLabel(): string
     {
         return static::getLabel();
     }
-    
+
     public static function getNavigationLabel(): string
     {
         return __('profile.navigation_label');
@@ -108,14 +111,14 @@ class EditProfile extends Page implements HasForms
                             ->visibility('public')
                             ->maxSize(2048)
                             ->alignCenter(),
-                            
+
                         Grid::make(2)
                             ->schema([
                                 TextInput::make('name')
                                     ->label(__('profile.fields.name'))
                                     ->required()
                                     ->maxLength(255),
-                                    
+
                                 TextInput::make('email')
                                     ->label(__('profile.fields.email'))
                                     ->email()
@@ -123,27 +126,27 @@ class EditProfile extends Page implements HasForms
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(255),
                             ]),
-                            
+
                         Grid::make(2)
                             ->schema([
                                 TextInput::make('phone')
                                     ->label(__('profile.fields.phone'))
                                     ->tel()
                                     ->maxLength(255),
-                                    
+
                                 DatePicker::make('birth_date')
                                     ->label(__('profile.fields.birth_date'))
                                     ->native(false)
                                     ->maxDate(now()->subYears(16)),
                             ]),
-                            
+
                         Textarea::make('bio')
                             ->label(__('profile.fields.bio'))
                             ->rows(3)
                             ->maxLength(500)
                             ->columnSpanFull(),
                     ]),
-                    
+
                 Section::make(__('profile.sections.work_information.title'))
                     ->description(__('profile.sections.work_information.description'))
                     ->columnSpan(1)
@@ -151,16 +154,16 @@ class EditProfile extends Page implements HasForms
                         TextInput::make('job_title')
                             ->label(__('profile.fields.job_title'))
                             ->maxLength(255),
-                            
+
                         TextInput::make('department')
                             ->label(__('profile.fields.department'))
                             ->maxLength(255),
-                            
+
                         TextInput::make('location')
                             ->label(__('profile.fields.location'))
                             ->maxLength(255),
                     ]),
-                    
+
                 Section::make(__('profile.sections.address.title'))
                     ->description(__('profile.sections.address.description'))
                     ->columnSpan(2)
@@ -169,24 +172,24 @@ class EditProfile extends Page implements HasForms
                             ->label(__('profile.fields.address'))
                             ->maxLength(255)
                             ->columnSpanFull(),
-                            
+
                         Grid::make(3)
                             ->schema([
                                 TextInput::make('postal_code')
                                     ->label(__('profile.fields.postal_code'))
                                     ->maxLength(10),
-                                    
+
                                 TextInput::make('city')
                                     ->label(__('profile.fields.city'))
                                     ->maxLength(255),
-                                    
+
                                 TextInput::make('country')
                                     ->label(__('profile.fields.country'))
                                     ->default('Norge')
                                     ->maxLength(255),
                             ]),
                     ]),
-                    
+
                 Section::make(__('profile.sections.social_media.title'))
                     ->description(__('profile.sections.social_media.description'))
                     ->columnSpan(1)
@@ -196,7 +199,7 @@ class EditProfile extends Page implements HasForms
                             ->url()
                             ->maxLength(255)
                             ->placeholder('https://linkedin.com/in/...'),
-                            
+
                         TextInput::make('twitter_url')
                             ->label(__('profile.fields.twitter_url'))
                             ->url()
@@ -230,7 +233,7 @@ class EditProfile extends Page implements HasForms
                             ->live(debounce: 500)
                             ->same('passwordConfirmation')
                             ->label(__('profile.fields.new_password')),
-                            
+
                         TextInput::make('passwordConfirmation')
                             ->password()
                             ->required()
